@@ -1,0 +1,24 @@
+use('CadastroUBS')
+
+ubs = {
+    "nomeUnidade": "UBS - Jardim Serrano",
+    "dataCadastro": "04-08-2024",
+    "cep": "18115550",
+    "endereco": {
+        "logradouro": "R.Francisco Lopes de Almeida",
+        "numero": 76,
+        "complemento": "",
+        "bairro": "Jardim Palmira",
+        "localidade": "Votorantim",
+        "uf": "SP"
+    },
+    "localizacao": {
+        "type": "Point",
+        "coordinates": [-23.55866, -47.45476]
+    }
+}
+
+db.unidades.insertOne(ubs)
+
+use('CadastroUBS')
+db.unidades.find()

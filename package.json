@@ -1,0 +1,27 @@
+{
+  "name": "trabalho1-rest-nosql",
+  "version": "1.0.0",
+  "description": "Pagina para efetuar cadastro de UBSs do SUS",
+  "main": "api/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon api/index.js"
+  },
+  "keywords": [
+    "REST",
+    "node.js",
+    "MongoDB"
+  ],
+  "author": "Kpi.var",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "mongodb": "^6.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
