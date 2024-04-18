@@ -7,8 +7,8 @@ const { db, ObjectId } = await connectToDatabase()
 const nomeCollection = 'unidades'
 
 const validaUnidade = [
-    check('nomeUnidade')
-        .custom(),
+    // check('nomeUnidade')
+    //     .custom(),
     check('cep')
         .not().isEmpty().trim().withMessage('É obrigatório informar o CEP')
         .isNumeric().withMessage('O CEP deve conter apenas números')
