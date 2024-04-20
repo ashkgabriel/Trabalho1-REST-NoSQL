@@ -79,7 +79,7 @@ nav a {
     }
 }
 
-.card {
+#footer {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -123,13 +123,17 @@ footer p,
 
 #apoiadores {
     height: 100px;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 1;
 }
 
 .apoiadores {
-    max-height: fit-content;
-    min-height: fit-content;
+    /* max-height: fit-content;
+    min-height: fit-content; */
     padding: 20px;
-    // background: radial-gradient(var(--white-bg), var(--blue-bg) 75%);
+    background: radial-gradient(var(--white-bg), var(--blue-bg) 75%);
+
 }
 
 #contatos img {
