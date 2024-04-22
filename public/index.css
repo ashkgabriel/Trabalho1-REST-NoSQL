@@ -179,3 +179,7 @@ select,
 label {
   font-size: large;
 }
+
+#formUnidades {
+    max-width: 600px;
+}

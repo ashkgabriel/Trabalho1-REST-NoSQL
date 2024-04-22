@@ -16,7 +16,7 @@ app.use('/', express.static('public'))
 app.disable('x-powered-by')
 
 // Configurando o favicon
-app.use('/favicon.ico', express.static('./public/images/logo-api.png'))
+app.use('/favicon.ico', express.static('./public/img/logo_sus_contata.svg'))
 
 // Rora default
 app.get('/api', (req, res) => {
@@ -28,7 +28,7 @@ app.get('/api', (req, res) => {
 
 // Listen
 app.listen(PORT, function () {
-    console.log(`💻 Servidor rodando na porta ${PORT}`);
+    console.log(`💻 Servidor rodando em http://localhost:${PORT}`);
 
 })
 

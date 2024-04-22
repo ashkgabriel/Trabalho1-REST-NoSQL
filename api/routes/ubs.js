@@ -7,8 +7,17 @@ const { db, ObjectId } = await connectToDatabase()
 const nomeCollection = 'unidades'
 
 const validaUnidade = [
-    // check('nomeUnidade')
-    //     .custom(),
+    check('nomeUnidade')
+        .custom(async (nomeUnidade, { req }) => {
+            const contaUnidade = await db.collection(nomeCollection)
+                .countDocuments({
+                    'nomeUnidade': nomeUnidade,
+                    '_id': { $ne: new ObjectId(req.body._id) } // Exclui o documento atual
+                })
+            if (contaUnidade > 0) {
+                throw new Error('A unidade informada já está cadastrada.')
+            }
+        }),
     check('cep')
         .not().isEmpty().trim().withMessage('É obrigatório informar o CEP')
         .isNumeric().withMessage('O CEP deve conter apenas números')
@@ -28,8 +37,8 @@ const validaUnidade = [
 
     check('endereco.uf').notEmpty().withMessage('O preenchimento do campo uf é obrigatório.'),
 
-    check('dataCadastro').matches(/^\d{2}-\d{2}-\d{4}$/)
-        .withMessage('O formato de data é inválido Informe no formato dd-mm-aaaa'),
+    check('dataCadastro').matches(/^\d{4}-\d{2}-\d{2}$/)
+        .withMessage('O formato de data é inválido Informe no formato aaaa-mm-dd'),
 
     check('localizacao.type').equals('Point').withMessage('Tipo inválido'),
 

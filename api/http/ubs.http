@@ -1,0 +1,68 @@
+// Teste da API Rest de prestadores
+
+@baseURL = http://localhost:4000/api/unidades
+
+###
+# GET - Lista todos as unidades cadastradas
+GET {{baseURL}}/?limit=10&skip=0
+Content-Type: application/json
+
+###
+# GET - Lista a UBS pelo ID
+GET {{baseURL}}/id/661554d59534a7df29d3656a
+Content-Type: application/json
+
+###
+# DELETE - Remove a unidade
+DELETE {{baseURL}}/661554d59534a7df29d3656a
+Content-Type: application/json
+
+###
+# POST - Insere uma novA unidade
+POST {{baseURL}}
+Content-Type: application/json
+
+{
+    "nomeUnidade": "UBS - Jardim Serrano",
+    "dataCadastro": "04-08-2024",
+    "cep": "18115550",
+    "endereco": {
+        "logradouro": "R.Francisco Lopes de Almeida",
+        "numero": 76,
+        "complemento": "",
+        "bairro": "Jardim Palmira",
+        "localidade": "Votorantim",
+        "uf": "SP"
+    },
+    "localizacao": {
+        "type": "Point",
+        "coordinates": [-23.55866, -47.45476]
+    }
+}
+
+###
+# PUT - Altera um prestador (pelo _id)
+PUT {{baseURL}}
+Content-Type: application/json
+
+{           
+    "_id": "661554d59534a7df29d3656a",
+    "nomeUnidade": "UBS - Jardim Serranoo",
+    "dataCadastro": "04-08-2024",
+    "cep": "18115550",
+    "endereco": {
+      "logradouro": "Rua Francisco Lopes de Almeida",
+      "numero": "76",
+      "complemento": "",
+      "bairro": "Jardim Palmira",
+      "localidade": "Votorantim",
+      "uf": "SP"
+    },
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [
+        -23.57406,
+        -47.46263
+      ]
+    }
+  }
