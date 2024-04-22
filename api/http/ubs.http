@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ###
 # GET - Lista a UBS pelo ID
-GET {{baseURL}}/id/661554d59534a7df29d3656a
+GET {{baseURL}}/?id=66267740a2099d1e634cae2f
 Content-Type: application/json
 
 ###
@@ -42,27 +42,27 @@ Content-Type: application/json
 
 ###
 # PUT - Altera um prestador (pelo _id)
-PUT {{baseURL}}
+PUT {{baseURL}}/?id=66267740a2099d1e634cae2f
 Content-Type: application/json
 
 {           
-    "_id": "661554d59534a7df29d3656a",
-    "nomeUnidade": "UBS - Jardim Serranoo",
-    "dataCadastro": "04-08-2024",
-    "cep": "18115550",
+     "_id": "6626c1cc9dc31a6afc66d1ab",
+    "nomeUnidade": "Teste",
+    "dataCadastro": "2024-04-22",
+    "cep": "18117133",
     "endereco": {
-      "logradouro": "Rua Francisco Lopes de Almeida",
-      "numero": "76",
+      "logradouro": "R. Jacques Gonçalves",
+      "numero": "256",
       "complemento": "",
-      "bairro": "Jardim Palmira",
+      "bairro": "Jardim Serra",
       "localidade": "Votorantim",
       "uf": "SP"
     },
     "localizacao": {
       "type": "Point",
       "coordinates": [
-        -23.57406,
-        -47.46263
+        "27",
+        "-47"
       ]
     }
   }

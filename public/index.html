@@ -172,6 +172,73 @@
     </div>
   </div>
 
+  <!-- Modal de Edição de Unidade -->
+  <div class="modal fade" id="modalEditarUnidade" tabindex="-1" aria-labelledby="modalEditarUnidadeLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditarUnidadeLabel">Editar Unidade</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditarUnidade">
+            <div class="mb-3">
+              <label for="editar_nome_unidade" class="form-label">Nome da Unidade</label>
+              <input type="text" class="form-control" id="editar_nome_unidade" name="editar_nome_unidade">
+            </div>
+            <div class="mb-3">
+              <label for="editar_data_de_cadastro" class="form-label">Data de Cadastro</label>
+              <input type="date" class="form-control" id="editar_data_de_cadastro" name="editar_data_de_cadastro">
+            </div>
+            <div class="mb-3">
+              <label for="editar_cep" class="form-label">CEP</label>
+              <input type="text" class="form-control" id="editar_cep" name="editar_cep">
+            </div>
+            <div class="mb-3">
+              <label for="editar_logradouro" class="form-label">Logradouro</label>
+              <input type="text" class="form-control" id="editar_logradouro" name="editar_logradouro">
+            </div>
+            <div class="mb-3">
+              <label for="editar_numero" class="form-label">Número</label>
+              <input type="number" class="form-control" id="editar_numero" name="editar_numero">
+            </div>
+            <div class="mb-3">
+              <label for="editar_complemento" class="form-label">Complemento</label>
+              <textarea class="form-control" id="editar_complemento" name="editar_complemento"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="editar_bairro" class="form-label">Bairro</label>
+              <input type="text" class="form-control" id="editar_bairro" name="editar_bairro">
+            </div>
+            <div class="mb-3">
+              <label for="editar_localidade" class="form-label">Localidade</label>
+              <input type="text" class="form-control" id="editar_localidade" name="editar_localidade">
+            </div>
+            <div class="mb-3">
+              <label for="editar_unidade_da_federacao" class="form-label">Unidade da Federação</label>
+              <select class="form-select" id="editar_unidade_da_federacao" name="editar_unidade_da_federacao">
+                <!-- Opções da Unidade da Federação aqui -->
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="editar_latitude" class="form-label">Latitude</label>
+              <input type="number" class="form-control" id="editar_latitude" name="editar_latitude" min="-90" max="90"
+                step="any">
+            </div>
+            <div class="mb-3">
+              <label for="editar_longitude" class="form-label">Longitude</label>
+              <input type="number" class="form-control" id="editar_longitude" name="editar_longitude" min="-180" max="180"
+                step="any">
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <footer>
     <div class="card  d-flex flex-row ms-4 me-4 justify-content-between" id="footer">
       <ul id="menu-footer" class="nav flex-column ms-4 flex-shrink-0">

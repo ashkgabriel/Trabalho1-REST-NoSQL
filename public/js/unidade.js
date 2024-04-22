@@ -39,9 +39,13 @@ async function carregaUnidades() {
                         <td>${unidade.endereco.logradouro}, ${unidade.endereco.numero}, ${unidade.endereco.bairro}, ${unidade.endereco.localidade}/${unidade.endereco.uf} - ${unidade.cep}</td>
                         <td>${dataFormatada}</td>
                         <td>${unidade.localizacao.coordinates[0]} / ${unidade.localizacao.coordinates[1]}</td>
-                        <td><button class="btn btn-danger btn-sm" onclick='removeUnidade("${unidade._id}")'>🗑 Excluir</button></td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick='removeUnidade("${unidade._id}")'>🗑 Excluir</button> 
+                            <br> 
+                            <button class="btn btn-success btn-sm" onclick="abrirModalEditar('${unidade._id}')">✏️ Editar</button>
+                        </td>
                     </tr>
-                `;
+                `
             } else {
                 console.error("Data inválida para unidade:", unidade);
             }
@@ -127,5 +131,90 @@ async function salvaUnidade(unidade) {
             }
         })
 }
+// Função para buscar uma unidade pelo ID
+async function buscarUnidadePorId(id) {
+    try {
+        // Aqui você pode implementar a lógica para buscar a unidade com o ID fornecido
+        // Por enquanto, vamos apenas retornar um objeto simulado para fins de demonstração
+        const response = await fetch(`/api/unidades/${id}`); // Supondo que você tenha uma rota na sua API para buscar uma unidade por ID
+        if (!response.ok) {
+            throw new Error('Erro ao buscar unidade');
+        }
+        const unidade = await response.json();
+        return unidade;
+    } catch (error) {
+        console.error('Erro ao buscar unidade:', error);
+        throw error; // Propaga o erro para o chamador da função
+    }
+}
 
+
+async function atualizaUnidade(idUnidade, dadosAtualizados) {
+    try {
+        const response = await fetch('/api/unidades', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ...dadosAtualizados, _id: idUnidade })
+        });
+        if (!response.ok) {
+            throw new Error('Erro ao atualizar a unidade de saúde');
+        }
+        const data = await response.json();
+        console.log('Unidade atualizada com sucesso:', data);
+
+    } catch (error) {
+        console.error('Erro ao atualizar a unidade de saúde:', error.message);
+    }
+}
+
+function abrirModalEditar(unidade) {
+    // Preencher os campos do modal com as informações da unidade
+    document.getElementById('editar_nome_unidade').value = unidade.nomeUnidade || '';
+    document.getElementById('editar_data_de_cadastro').value = unidade.dataCadastro || '';
+    document.getElementById('editar_cep').value = unidade.cep || '';
+
+    // Verificar se o objeto endereco está definido
+    if (unidade.endereco) {
+        document.getElementById('editar_logradouro').value = unidade.endereco.logradouro || '';
+        document.getElementById('editar_numero').value = unidade.endereco.numero || '';
+        document.getElementById('editar_complemento').value = unidade.endereco.complemento || '';
+        document.getElementById('editar_bairro').value = unidade.endereco.bairro || '';
+        document.getElementById('editar_localidade').value = unidade.endereco.localidade || '';
+        document.getElementById('editar_unidade_da_federacao').value = unidade.endereco.uf || '';
+    }
+
+    // Verificar se a propriedade localizacao está definida
+    if (unidade.localizacao && unidade.localizacao.coordinates) {
+        document.getElementById('editar_latitude').value = unidade.localizacao.coordinates[1] || '';
+        document.getElementById('editar_longitude').value = unidade.localizacao.coordinates[0] || '';
+    }
+
+    // Abrir o modal de edição
+    var modal = new bootstrap.Modal(document.getElementById('modalEditarUnidade'), {
+        keyboard: false
+    });
+    modal.show();
+}
+
+function preencherModalEditar(unidade) {
+    // Verificar se a unidade está definida
+    if (unidade) {
+        // Preencher os campos do modal com as informações da unidade
+        document.getElementById('nome_unidade').value = unidade.nomeUnidade || '';
+        document.getElementById('data-de-cadastro').value = unidade.dataCadastro || '';
+        document.getElementById('cep').value = unidade.cep || '';
+        document.getElementById('logradouro').value = (unidade.endereco && unidade.endereco.logradouro) || '';
+        document.getElementById('numero').value = (unidade.endereco && unidade.endereco.numero) || '';
+        document.getElementById('complemento').value = (unidade.endereco && unidade.endereco.complemento) || '';
+        document.getElementById('bairro').value = (unidade.endereco && unidade.endereco.bairro) || '';
+        document.getElementById('localidade').value = (unidade.endereco && unidade.endereco.localidade) || '';
+        document.getElementById('unidade-da-federacao').value = (unidade.endereco && unidade.endereco.uf) || '';
+        document.getElementById('latitude').value = (unidade.localizacao && unidade.localizacao.coordinates && unidade.localizacao.coordinates[0]) || '';
+        document.getElementById('longitude').value = (unidade.localizacao && unidade.localizacao.coordinates && unidade.localizacao.coordinates[1]) || '';
+    } else {
+        console.error('Unidade não definida');
+    }
+}
 
