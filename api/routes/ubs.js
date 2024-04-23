@@ -20,7 +20,7 @@ const validaUnidade = [
         }),
     check('cep')
         .not().isEmpty().trim().withMessage('É obrigatório informar o CEP')
-        .isNumeric().withMessage('O CEP deve conter apenas números')
+        .isNumeric().isInt({ min: 0 }).withMessage('O CEP deve conter apenas números e positivos')
         .isLength({ min: 8, max: 8 }).withMessage('O CEP informado é inválido'),
 
     check('endereco.logradouro')
@@ -30,7 +30,7 @@ const validaUnidade = [
 
     check('endereco.numero')
         .trim().notEmpty().withMessage('O preenchimento do campo número é obrigatório. Caso não possua, inserir o numeral zero.')
-        .isNumeric().isInt().withMessage('O campo de número deve ser preenchido com numerais inteiros.')
+        .isNumeric().isInt({ min: 0}).withMessage('O campo de número deve ser preenchido com numerais inteiros e positivos.')
     ,
 
     check('endereco.bairro').notEmpty().withMessage('O preenchimento do campo bairro é obrigatório.'),

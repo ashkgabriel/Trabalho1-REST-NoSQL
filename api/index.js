@@ -7,6 +7,10 @@ config() // Carrega as variáveis do .env
 const app = express()
 const { PORT } = process.env
 
+import cors from "cors";
+//Habilita o CORS Cross-Origin resource sharing
+app.use(cors())
+
 app.use(express.json()) // Habilita o parse do JSON
 
 // Rota de conteúdo público

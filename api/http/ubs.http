@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ###
 # GET - Lista a UBS pelo ID
-GET {{baseURL}}/?id=66267740a2099d1e634cae2f
+GET {{baseURL}}/?id=6626c1cc9dc31a6afc66d1ab
 Content-Type: application/json
 
 ###
@@ -24,7 +24,7 @@ Content-Type: application/json
 
 {
     "nomeUnidade": "UBS - Jardim Serrano",
-    "dataCadastro": "04-08-2024",
+    "dataCadastro": "2024-08-04",
     "cep": "18115550",
     "endereco": {
         "logradouro": "R.Francisco Lopes de Almeida",
@@ -42,12 +42,12 @@ Content-Type: application/json
 
 ###
 # PUT - Altera um prestador (pelo _id)
-PUT {{baseURL}}/?id=66267740a2099d1e634cae2f
+PUT {{baseURL}}/?id=6626c1cc9dc31a6afc66d1ab
 Content-Type: application/json
 
 {           
      "_id": "6626c1cc9dc31a6afc66d1ab",
-    "nomeUnidade": "Teste",
+    "nomeUnidade": "Teste alterado",
     "dataCadastro": "2024-04-22",
     "cep": "18117133",
     "endereco": {
