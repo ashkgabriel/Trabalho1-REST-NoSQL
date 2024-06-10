@@ -1,5 +1,5 @@
 const urlBase = window.location.href.replace(/\/[^\/]*$/, '') + '/api'
-
+const access_token = localStorage.getItem('token') || null
 const resultadoModal = new bootstrap.Modal(document.getElementById('modalMensagem'));
 
 function converterData(dataString) {
@@ -16,11 +16,12 @@ async function carregaUnidades() {
     const tabela = document.getElementById('dadosTabela');
     tabela.innerHTML = ''; // Limpa antes de carregar
 
-    try {
+    
         const response = await fetch(`${urlBase}/unidades`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'access-token': access_token
             }
         });
 
@@ -50,10 +51,7 @@ async function carregaUnidades() {
             } else {
                 console.error("Data inválida para unidade:", unidade);
             }
-        });
-    } catch (error) {
-        console.error("Erro ao carregar unidades:", error);
-    }
+        })
 }
 
 async function removeUnidade(id) {
@@ -61,7 +59,8 @@ async function removeUnidade(id) {
         await fetch(`${urlBase}/unidades/${id}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'access-token': access_token
             }
         })
             .then(response => response.json())
@@ -106,7 +105,8 @@ async function salvaUnidade(unidade) {
     await fetch(`${urlBase}/unidades`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'access-token': access_token
         },
         body: JSON.stringify(unidade)
     })
@@ -133,7 +133,8 @@ async function buscarUnidadePorId(id) {
         const response = await fetch(`${urlBase}/unidades/${id}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'access-token': access_token
             }
         });
         if (!response.ok) {
@@ -260,7 +261,8 @@ async function atualizarUnidade(unidadeAtualizada) {
         const response = await fetch(`${urlBase}/unidades/${unidadeAtualizada._id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'access-token': access_token
             },
             body: JSON.stringify(unidadeAtualizadaSemId)
         });

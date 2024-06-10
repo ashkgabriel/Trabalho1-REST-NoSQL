@@ -3,6 +3,82 @@
 @baseURL = http://localhost:4000/api/unidades
 
 ###
+# Com token GET - Lista todos as unidades cadastradas
+GET {{baseURL}}/?limit=10&skip=0
+Content-Type: application/json
+access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiNjY2NmU3MzE4NzQ2Y2UwOWI2ZjYyN2NhIn0sImlhdCI6MTcxODA1MzM3NiwiZXhwIjoxNzE4MTM5Nzc2fQ.pGHd7kjMlJvXH343MHs0JmNcIJ8KcGB3mKKTl1KKO7U
+
+###
+# Com token GET - Lista a UBS pelo ID
+GET {{baseURL}}/6626c1cc9dc31a6afc66d1ab
+Content-Type: application/json
+access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiNjY2NmU3MzE4NzQ2Y2UwOWI2ZjYyN2NhIn0sImlhdCI6MTcxODA1MzM3NiwiZXhwIjoxNzE4MTM5Nzc2fQ.pGHd7kjMlJvXH343MHs0JmNcIJ8KcGB3mKKTl1KKO7U
+
+###
+# Com token GET - Lista a UBS pelo filtro
+GET {{baseURL}}/filtrar-ubs/117
+Content-Type: application/json
+access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiNjY2NmU3MzE4NzQ2Y2UwOWI2ZjYyN2NhIn0sImlhdCI6MTcxODA1MzM3NiwiZXhwIjoxNzE4MTM5Nzc2fQ.pGHd7kjMlJvXH343MHs0JmNcIJ8KcGB3mKKTl1KKO7U
+
+###
+# Com token DELETE - Remove a unidade
+DELETE {{baseURL}}/661554d59534a7df29d3656a
+Content-Type: application/json
+access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiNjY2NmU3MzE4NzQ2Y2UwOWI2ZjYyN2NhIn0sImlhdCI6MTcxODA1MzM3NiwiZXhwIjoxNzE4MTM5Nzc2fQ.pGHd7kjMlJvXH343MHs0JmNcIJ8KcGB3mKKTl1KKO7U
+
+###
+# Com token POST - Insere uma novA unidade
+POST {{baseURL}}
+Content-Type: application/json
+access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiNjY2NmU3MzE4NzQ2Y2UwOWI2ZjYyN2NhIn0sImlhdCI6MTcxODA1MzM3NiwiZXhwIjoxNzE4MTM5Nzc2fQ.pGHd7kjMlJvXH343MHs0JmNcIJ8KcGB3mKKTl1KKO7U
+
+{
+    "nomeUnidade": "UBS - Jardim Serrano",
+    "dataCadastro": "2024-08-04",
+    "cep": "18115550",
+    "endereco": {
+        "logradouro": "R.Francisco Lopes de Almeida",
+        "numero": 76,
+        "complemento": "",
+        "bairro": "Jardim Palmira",
+        "localidade": "Votorantim",
+        "uf": "SP"
+    },
+    "localizacao": {
+        "type": "Point",
+        "coordinates": [-23.55866, -47.45476]
+    }
+}
+
+###
+# Com token PUT - Altera um prestador (pelo _id)
+PUT {{baseURL}}/?id=6626c1cc9dc31a6afc66d1ab
+Content-Type: application/json
+access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiNjY2NmU3MzE4NzQ2Y2UwOWI2ZjYyN2NhIn0sImlhdCI6MTcxODA1MzM3NiwiZXhwIjoxNzE4MTM5Nzc2fQ.pGHd7kjMlJvXH343MHs0JmNcIJ8KcGB3mKKTl1KKO7U
+
+{           
+     "_id": "6626c1cc9dc31a6afc66d1ab",
+    "nomeUnidade": "Teste alterado",
+    "dataCadastro": "2024-04-22",
+    "cep": "18117133",
+    "endereco": {
+      "logradouro": "R. Jacques Gonçalves",
+      "numero": "256",
+      "complemento": "",
+      "bairro": "Jardim Serra",
+      "localidade": "Votorantim",
+      "uf": "SP"
+    },
+    "localizacao": {
+      "type": "Point",
+      "coordinates": [
+        "27",
+        "-47"
+      ]
+    }
+  }
+
+  ###
 # GET - Lista todos as unidades cadastradas
 GET {{baseURL}}/?limit=10&skip=0
 Content-Type: application/json
