@@ -1,6 +1,7 @@
 import express from "express";
 import { check, validationResult } from "express-validator";
 import { connectToDatabase } from "../utils/mongodb.js";
+import auth from '../middleware/auth.js'
 
 const router = express.Router()
 const { db, ObjectId } = await connectToDatabase()
@@ -53,7 +54,7 @@ const validaUnidade = [
 *Lista todas as unidades de saúde
 */
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     const { limit, skip, order } = req.query // Obter da URL
 
     try {
@@ -78,12 +79,98 @@ router.get('/', async (req, res) => {
 })
 
 /*
+*   GET /api/unidades/:id
+*   Lista unidade localizada pelo ID
+*/
+
+router.get('/:id', auth, async (req, res) => {
+    try {
+        const docs = []
+        await db.collection(nomeCollection)
+            .find({ '_id': { $eq: new ObjectId(req.params.id) } }, {})
+            .forEach((doc) => {
+                docs.push(doc)
+            })
+        res.status(200).json(docs)
+    } catch (err) {
+        res.status(500).json({
+            errors: [{
+                value: `${err.message}`,
+                msg: 'Erro ao obter o prestador pelo ID',
+                param: '/:id'
+            }]
+        })
+    }
+})
+
+/*
+*   GET /api/unidades/filtrar-ubs/:filtro
+*   Lista unidades filtradas de acordo com filtro selecionado
+*/
+
+router.get('/filtrar-ubs/:filtro', auth, async (req, res) => {
+    try {
+        const filtro = req.params.filtro.toString();
+        const docs = [];
+        await db.collection(nomeCollection)
+            .find({
+                $or: [
+                    { 'nomeUnidade': { $regex: filtro, $options: 'i' } },
+                    { 'endereco.bairro': { $regex: filtro, $options: 'i' } },
+                    { 'cep': { $regex: filtro, $options: 'i' } }
+                ]
+            })
+            .forEach((doc) => {
+                docs.push(doc);
+            });
+        res.status(200).json(docs);
+    } catch (err) {
+        res.status(500).json({
+            errors: [{
+                value: `${err.message}`,
+                msg: 'Erro ao obter a unidade pelo filtro desejado',
+                param: '/filtrar-ubs/:filtro'
+            }]
+        });
+    }
+});
+
+/*
+*   GET /api/unidades/filtrar-ubs/:filtroData1/:filtroData2
+*   Lista unidades filtradas de acordo com filtro selecionado
+*/
+
+router.get('/filtrar-ubs/:data1/:data2', auth, async (req, res) => {
+    try {
+        const data1 = req.params.data1;
+        const data2 = req.params.data2;
+        const docs = [];
+        await db.collection(nomeCollection)
+            .find({
+                'dataCadastro': { $gte: new Date(data1), $lte: new Date(data2) }
+            })
+            .forEach((doc) => {
+                docs.push(doc);
+            });
+        res.status(200).json(docs);
+    } catch (err) {
+        res.status(500).json({
+            errors: [{
+                value: `${err.message}`,
+                msg: 'Erro ao obter as unidades pelo filtro de datas',
+                param: '/filtrar-ubs/:data1/:data2'
+            }]
+        });
+    }
+});
+
+/*
 * POST /api/unidades
 * Insere uma nova unidade de saúde
 * Parametros: Objeto unidade
 */
 
-router.post('/', validaUnidade, async (req, res) => {
+router.post('/', auth, validaUnidade, async (req, res) => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -103,9 +190,9 @@ router.post('/', validaUnidade, async (req, res) => {
 * Parametros: Objeto unidade
 */
 
-router.put('/', validaUnidade, async (req, res) => {
-    let idDocumento = req.body._id
-    delete req.body._id
+router.put('/:id', auth, async (req, res) => {
+    const idDocumento = req.params.id;
+
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -126,7 +213,7 @@ router.put('/', validaUnidade, async (req, res) => {
 * Parametros: ID
 */
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const result = await db.collection(nomeCollection).deleteOne({
         '_id': { $eq: new ObjectId(req.params.id) }
     })

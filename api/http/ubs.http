@@ -9,7 +9,12 @@ Content-Type: application/json
 
 ###
 # GET - Lista a UBS pelo ID
-GET {{baseURL}}/?id=6626c1cc9dc31a6afc66d1ab
+GET {{baseURL}}/6626c1cc9dc31a6afc66d1ab
+Content-Type: application/json
+
+###
+# GET - Lista a UBS pelo filtro
+GET {{baseURL}}/filtrar-ubs/117
 Content-Type: application/json
 
 ###
