@@ -22,7 +22,7 @@ access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiNjY2N
 
 ###
 # Com token DELETE - Remove a unidade
-DELETE {{baseURL}}/661554d59534a7df29d3656a
+DELETE {{baseURL}}/666772e57ccd10a9da9fd47b
 Content-Type: application/json
 access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoiNjY2NmU3MzE4NzQ2Y2UwOWI2ZjYyN2NhIn0sImlhdCI6MTcxODA1MzM3NiwiZXhwIjoxNzE4MTM5Nzc2fQ.pGHd7kjMlJvXH343MHs0JmNcIJ8KcGB3mKKTl1KKO7U
 
