@@ -294,7 +294,13 @@ document.getElementById('search-button').addEventListener('click', async () => {
         const filtro = document.getElementById('filtroInput').value;
 
         // Faz a requisição GET para o endpoint de filtragem
-        const response = await fetch(`${urlBase}/unidades/filtrar-ubs/${filtro}`);
+        const response = await fetch(`${urlBase}/unidades/filtrar-ubs/${filtro}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'access-token': access_token
+            }
+        })
 
         // Verifica se a requisição foi bem-sucedida
         if (response.ok) {
@@ -320,7 +326,13 @@ document.getElementById('search-button2').addEventListener('click', async () => 
         const data2 = document.getElementById('filtroData2').value;
 
         // Faz a requisição GET para o endpoint de filtragem com datas
-        const response = await fetch(`${urlBase}/unidades/filtrar-ubs/${data1}/${data2}`);
+        const response = await fetch(`${urlBase}/unidades/filtrar-ubs/${data1}/${data2}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'access-token': access_token
+            }
+        });
 
         // Verifica se a requisição foi bem-sucedida
         if (response.ok) {
