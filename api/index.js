@@ -9,6 +9,8 @@ import swaggerUI from "swagger-ui-express";
 
 config() // Carrega as variáveis do .env 
 
+
+
 const app = express()
 const { PORT } = process.env
 
