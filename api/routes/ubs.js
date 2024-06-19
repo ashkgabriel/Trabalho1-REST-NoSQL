@@ -54,15 +54,13 @@ const validaUnidade = [
 *Lista todas as unidades de saúde
 */
 
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
     const { limit, skip, order } = req.query // Obter da URL
 
     try {
         const docs = []
         await db.collection(nomeCollection)
             .find()
-            .limit(parseInt(limit) || 10)
-            .skip(parseInt(skip) || 0)
             .sort({ order: 1 })
             .forEach((doc) => {
                 docs.push(doc)
